@@ -1,0 +1,353 @@
+\documentclass[pdf]
+{beamer}
+\usetheme{Copenhagen}
+%\usetheme{Warsaw}
+\usepackage[spanish]{babel}
+\usepackage{lmodern}
+
+\newcommand{\automation}{\textit{Automatizaci\'on}}
+\newcommand{\tdd}{\textit{TDD}}
+\newcommand{\testing}{\textit{testing}}
+\newcommand{\android}{\textit{Android}}
+\newcommand{\espresso}{\textit{Espresso}}
+\mode<presentation>{}
+
+\title{Automatizaci\'on de pruebas en \android{}}
+\subtitle{Usando \textit{Espresso}}
+\author{Jorge Bautista}
+
+
+\AtBeginSection[]
+{
+\begin{frame}
+    \frametitle{Contenido}
+    \tableofcontents[currentsection]
+\end{frame}
+}
+
+
+\AtBeginSubsection[]
+{
+\begin{frame}
+    \frametitle{Contenido}
+    \tableofcontents[currentsection,currentsubsection]
+\end{frame}
+}
+
+
+\begin{document}
+    
+     
+    \begin{frame}
+        \titlepage
+    \end{frame}
+    
+%     \begin{frame}
+%         \frametitle{Outline}
+%         \tableofcontents[currentsection]
+%     \end{frame}
+
+    \section{Automatizaci\'on de pruebas}
+%     \section{Automatizaci\'on de pruebas}
+%         \subsection{Tipos de pruebas}
+%         \begin{frame}{Pruebas en los desarrollos de software}
+%             \begin{figure}[ht]
+%                 \begin{center}
+%                     \includegraphics[height=2.6in]{figures/types_of_testing}
+%                 %\footnote{Apologies to\\Gary Larson}
+%                 \end{center}
+%             \end{figure}
+%         \end{frame}
+%         
+
+        \subsection{Pruebas de regresi\'on}
+        \begin{frame}{Pruebas de regresi\'on}
+	  Probar toda la aplicaci\'on en busca de posibles errores derivados de la modificaci\'on de un m\'odulo o funcionalidad . Se requiere de un gran trabajo para poder validar la funcionalidad de todo el sistema.
+
+        \end{frame}
+        
+        \subsection{Automatizaci\'on}
+        \begin{frame}{?`Qu\'e es Automatizaci\'on?}
+	  \begin{columns}
+	    \column{0.5\textwidth}
+	      Permiten la ejecuci\'on r\'apida de una serie de pruebas de regresi\'on con el objetivo de verificar una y otra vez que una modificaci\'on en el c\'odigo no ha generado nuevos errores en la aplicaci\'on.
+	    \column{0.5\textwidth}
+		\begin{block}<2->{TDD}
+                    Algunos ciclos de TDD + 1 ciclo de pruebas automatizadas
+                \end{block}
+                \begin{block}<3->{Continuos integration}
+                    Agregando una fase al servidor de integraci\'on
+                \end{block}
+                \begin{block}<4->{Agile development}
+                    Combinar con otros tipos de testing, feedback r\'apido, ``confianza'' para el desarrollador, menos documentaci\'on.
+                \end{block}
+	  \end{columns}
+        \end{frame}
+        
+        \subsection{Importancia de la automatizaci\'on}
+        \begin{frame}{Importancia de la automatizaci\'on}
+            \begin{itemize}
+             \item<2-> Valida que producto haga lo que la especificaci\'on dicta
+             \item<3-> Funciona como documentaci\'on ya que es una muestra ``viva''
+             \item<4-> Evita ambig\"uedades en la comprensi\'on del requerimiento. Hay un feedback m\'as r\'apido por parte del cliente.
+             \item<5-> Permite a testers y desarrolladores enfocarse en lo importante
+             \item<6-> Aumenta la confianza entre testers y desarrolladores
+             \item<7-> Facilita el mantenimiento
+		\begin{itemize}
+		  \item<8-> Es f\'acil saber lo que hace una pieza de software
+		  \item<9-> Nueva versi\'on del SDK de Android
+		  \item<10-> Despu\'es de un cambio en el c\'odigo; modificaciones sin riesgo (``red de seguridad'' contra regresiones)
+		\end{itemize}
+
+            \end{itemize}
+%             \begin{block}<11->{En resumen}
+%                     Facilita el mantenimiento y la implementaci\'on de nuevos features
+%             \end{block}
+
+        \end{frame}
+        
+    \section{Tecnolog\'ias}
+    \subsection{Tecnolog\'ias de automatizaci\'on}
+    \begin{frame}{Ejemplos de tecnolog\'ias de automatizaci\'on}
+        \begin{block}<2->{Web}
+	    Selenium, Watir, Windmill, \textbf{Ranorex}, Sahi, Tellurium 
+	\end{block}
+	\begin{block}<3->{Escritorio}
+	    Squish, \textbf{Ranorex}, TestComplete, Test Studio, eggPlant
+	\end{block}
+	\begin{block}<4->{M\'ovil}
+	    Appium, Selendroid, Robotium, MonkeyRunner, \textbf{Ranorex}, DeviceAnywhere, eggPlant, SilkMobile, SeeTest, MonkeyTalk, Espresso
+	\end{block}
+% 	\begin{block}<5->{Bases de Datos}
+% 	    Simmons Hall $\not=$ Simmons Dormitory.
+% 	\end{block}
+    \end{frame}
+% 
+%     \subsection{Tecnolog\'ias para android}
+%     \begin{frame}{Buenas pr\'acticas de desarrollo}
+% 
+%         \begin{enumerate}[A]
+%             \item<2-5> James Madison
+%             \item<3-5> Harry Truman
+%             \item<4-5> \color<6>[rgb]{0,0.6,0}Abraham Lincoln
+%             \item<5-5> Calvin Coolidge
+%         \end{enumerate}
+%         \uncover<1-5>{Hints:}\\
+%         \uncover<2-5>{James Madison ate broccoli.}\\
+%         \uncover<3-5>{Harry Truman drank milk.}\\
+%         \uncover<4-5>{Abe Lincoln raised bees.}\\
+%         \uncover<5-5>{And Cal Coolidge grew silk.}\\
+%     \end{frame}
+%     
+    
+%     \subsubsection{Instrumentation}
+%     \begin{frame}{Ventajas de hacer \testing{}}
+%         \newtheorem{thm}{Easy Theorem}
+%         \newtheorem{pf}{Proof}
+%         \newtheorem{rmk}{Remark}
+%         \begin{thm}
+%             $$x^n+y^n=z^n,$$
+%             has no integer solutions for $n>2$
+%             where $x,\,y,\,z\,\neq\,0$.
+%         \end{thm}
+%         \begin{thm}
+%             The proof is trivial and left as an exercise.
+%         \end{thm}
+%         \begin{thm}
+%             This problem was first posed in $10,000$ B.C.
+%         \end{thm}
+%     \end{frame}
+%     
+%     \subsubsection{Espresso}
+%     \begin{frame}{\automation{}}
+%         Body
+%     \end{frame}
+%     
+%     \section{Demo}
+%     \begin{frame}{\automation{} VS \tdd{}}
+%         https://github.com/jorgwel/CriminalIntent
+%     \end{frame}
+% 
+%     \begin{frame}{Ventajas de \automation{}}
+%         Body
+%     \end{frame}
+    
+%     \subsection{Tecnolog\'ias}    
+%     \begin{frame}{Tecnolog\'ias para hacer \testing{}}
+%         \begin{columns}
+%             \column{0.5\textwidth}
+%                 \begin{figure}[ht]
+%                     \begin{center}
+%                         \includegraphics[height=1in]{figures/types_of_testing}
+%                     %\footnote{Apologies to\\Gary Larson}
+%                     \end{center}
+%                 \end{figure}
+%             \column{0.5\textwidth}
+%                 \begin{block}<2->{Observation 1}
+%                     Simmons Hall is composed of metal and concrete.
+%                 \end{block}
+%                 \begin{block}<3->{Observation 2}
+%                     Simmons Dormitory is composed of brick.
+%                 \end{block}
+%                 \begin{block}<4->{Conclusion}
+%                     Simmons Hall $\not=$ Simmons Dormitory.
+%                 \end{block}
+%         \end{columns}
+%     \end{frame}
+    \subsection{API de pruebas de Android}
+    \begin{frame}{API de pruebas de Android}
+      La API de testing de Android est\'a basada en JUnit + framework Instrumentation + clases de testing de Android
+      \begin{figure}[ht]
+	\begin{center}
+	  \includegraphics[height=1.7in]{figures/testing_api.eps}
+	  %\footnote{Apologies to\\Gary Larson}
+	\end{center}
+      \end{figure}
+    \end{frame}
+    \subsection{Instrumentation}
+    \begin{frame}{InstrumentationTestCase}
+    \begin{itemize}
+     \item TODO: Investigar como correr las pruebas en terminal
+     \item TODO: Investigar quien se encarga de correrlas
+     \item TODO: Mini resumen de como correrlas (grafo ordenado)
+     \item TODO: Investigar donde deben de ir las pruebas a ser ejecutadas
+     \item TODO: Acomodar el porque de las pruebas : Uncle Bob
+    \end{itemize}
+
+    Conjunto de m\'etodos de control o \textit{``hooks''} dentro de Android
+      \begin{block}<2->{ActivityInstrumentationTestCase2}
+	\begin{figure}[ht]
+	  \begin{center}
+	    \includegraphics[height=.7in]{figures/jerarquia_android_test_case.png}
+	    %\footnote{Apologies to\\Gary Larson}
+	  \end{center}
+	\end{figure}
+      \end{block}
+      
+      \begin{itemize}
+	\item<3-> \textbf{Control en el ciclo de vida: }Iniciar, pausar, detener la actividad
+	\item<4-> \textbf{Inyecci\'on de dependencias: }Mockear Context y Application
+	\item<5-> \textbf{Interacci\'on con la interfaz de usuario: }Eventos de teclado o directamente a la UI
+      \end{itemize}
+      
+    \end{frame}
+    
+    \subsection{Espresso}
+    \begin{frame}{Espresso}
+      \begin{block}<2->{ActivityInstrumentationTestCase2}
+	\begin{figure}[ht]
+	  \begin{center}
+	    \includegraphics[height=.7in]{figures/jerarquia_android_test_case.png}
+	    %\footnote{Apologies to\\Gary Larson}
+	  \end{center}
+	\end{figure}
+      \end{block}
+      
+      \begin{itemize}
+	\item<3-> \textbf{Control en el ciclo de vida: }Provee de m\'etodos para iniciar la actividad, pausarla, destruirla
+	\item<4-> \textbf{Inyecci\'on de dependencias: }Permite mockear objetos de sistema como Context y Application.
+	\item<5-> \textbf{Interacci\'on con la interfaz de usuario: }Puede enviar eventos de teclado o directamente a la UI de la Activity que est\'a siendo probada.
+      \end{itemize}
+      
+    \end{frame}
+    
+    
+    \begin{frame}{Tecnolog\'ias para hacer \testing{} en \android{}}
+        Body
+    \end{frame}
+    
+    \begin{frame}{(Un poco de)Historia de \espresso{}}
+        Body
+    \end{frame}
+
+    \begin{frame}{?`Por qu\'e decid\'i usar \espresso{}?}
+        Body
+    \end{frame}
+    
+    \begin{frame}{\espresso{}}
+        Body
+    \end{frame}
+    
+    \begin{frame}{\espresso{} (a color)}
+        Body
+    \end{frame}
+    \section{Recomendaciones finales}
+    \begin{frame}{Recomendaciones para la automatizaci\'on}
+      \begin{itemize}
+       \item Lleva un historial de m\'etricas de performance
+       \item Considera pruebas que simulen comportamientos concurrentes
+       \item Evita acoplar datos est\'aticos + \textit{Data Fuzzing}
+       \item No automatices todo. Considera mantenimiento, complejidad y falso sentido de seguridad. 
+       \item Trabajar en equipo con los testers
+       \item Al alcance de todos \& Lejos de tu m\'aquina local
+       \item El tiempo de ejecuci\'on es importante, encuentra la forma de acortarlo
+
+      \end{itemize}
+
+    \end{frame}
+    
+    \section{Bibliograf\'ia}
+    \begin{frame}{Bibliograf\'ia (1/2)}
+      \frametitle<presentation>{Bibliograf\'ia (1/2)}
+      
+      \begin{thebibliography}{10}    
+      \beamertemplatebookbibitems
+	\bibitem{Specification by Example}
+	  Gojko Adzic, {\em Specification by Example}
+	  %\newblock {\em Specification by Example}
+	  \newblock Manning Publications, 2011
+      %\beamertemplatearticlebibitems
+      \setbeamertemplate{bibliography item}[online]
+	\bibitem{InfoQ}
+	  InfoQ, {\em Thoughts on Test Automation in Agile}
+	  %\newblock \textit{Thoughts on Test Automation in Agile}
+	  \newblock \small{\href{http://www.infoq.com/articles/thoughts-on-test-automation-in-agile}{http://www.infoq.com/articles/thoughts-on-test-automation-in-agile}}
+	  %\newblock {\em Journal of This and That}, 2(1):50--100, 2000.
+%      \beamertemplatearticlebibitems
+      \setbeamertemplate{bibliography item}[online]
+	\bibitem{WikipediA}
+	  WikipediA, {\em Software testing}
+	  %\newblock {\em Software testing}
+% 	  \newblock \href{http://www.infoq.com/articles/thoughts-on-test-automation-in-agile}{http://www.infoq.com/articles/thoughts-on-test-automation-in-agile}
+	  \newblock \href{https://en.wikipedia.org/wiki/Software\_testing}{https://en.wikipedia.org/wiki/Software\_testing}
+	  
+      \setbeamertemplate{bibliography item}[online]
+	\bibitem{ApplicationTypes}
+	  J.D. Meier's Blog, {\em Application Types (App Types) - The Early Years}
+	  %\newblock {\em Application Types (App Types) - The Early Years}
+	  \newblock {\tiny \href{http://blogs.msdn.com/b/jmeier/archive/2010/07/29/application-types-app-types-the-early-years.aspx}{http://blogs.msdn.com/b/jmeier/archive/2010/07/29/application-types-app-types-the-early-years.aspx}}
+      
+      \setbeamertemplate{bibliography item}[online]
+	\bibitem{AutomationTools}
+	  Software Testing Tools, {\em Software Test Automation Tools}
+	  %\newblock {\em Application Types (App Types) - The Early Years}
+	  \newblock {\small \href{http://www.testingtools.com/test-automation/}{http://www.testingtools.com/test-automation/}}
+      \end{thebibliography}
+      
+    \end{frame}
+    
+    \begin{frame}{Bibliograf\'ia (2/2)}
+      \frametitle<presentation>{Bibliograf\'ia (2/2)}    
+      
+      \begin{thebibliography}{10}    
+      \setbeamertemplate{bibliography item}[online]
+	\bibitem{Voguella}
+	  Voguella, {\em Developing Android unit and instrumentation tests - Tutorial}
+	  \newblock {\small\href{http://www.vogella.com/tutorials/AndroidTesting/article.html}{http://www.vogella.com/tutorials/AndroidTesting/article.html}}
+	  
+      \setbeamertemplate{bibliography item}[online]
+	\bibitem{Android Research Blog}
+	  Android Research Blog, {\em Introduction to Android Espresso}
+	  \newblock {\small\href{https://androidresearch.wordpress.com/2015/04/04/an-introduction-to-espresso/}{https://androidresearch.wordpress.com/2015/04/04/an-introduction-to-espresso/}}
+	  
+      \setbeamertemplate{bibliography item}[online]
+	\bibitem{Developer Android}
+	  Developer Android, {\em Testing Fundamentals}
+	  \newblock {\small\href{http://developer.android.com/intl/es/tools/testing/testing\_android.html}{http://developer.android.com/intl/es/tools/testing/testing\_android.html}}
+
+      \end{thebibliography}
+      
+    \end{frame}
+
+
+\end{document}
