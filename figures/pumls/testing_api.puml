@@ -1,0 +1,31 @@
+@startuml
+
+skinparam state {
+  BackgroundColor<<MasAmarillo>> #F0BB1D
+  BackgroundColor<<MasRojo>> #FB7374
+}
+
+	state TheTestingAPI {
+'	      [*] --> JUnit
+	      Tests -left-> JUnit: se basan en 
+'	      TestCase --> JUnit: Se utiliza <b>TestCase</b> de JUnit\ncuando no hay llamadas al\nAPI de Android
+'	      AndroidTestCase --> TestCase: Toma como base <b>TestCase</b> para \ndar soporte a pruebas con llamadas\nal API de Android
+'	      Assert -up-> JUnit
+	      ': Se utiliza Assert de JUnit\npara evaluar los tests
+	      Tests -->	InstrumentationTestRunner: se ejecutan con
+	      Tests --> TestCase: cuando <b>no</b> hay llamadas al\nAPI de Android se usa
+	      Tests -right-> AndroidTestCase: cuando <b>sí</b> hay llamadas al\nAPI de Android se usa
+	      AndroidTestCase --> TestCase: se basa en
+
+	      InstrumentationTestRunner --> JUnit: extiende de
+	      
+	}
+
+	state Tests as "<size:20><b>    Tests    </b></size>" <<MasAmarillo>>
+	state TheTestingAPI as "Testing API de Android"
+
+'	TheTestingAPI: La API de testing de Android está basada en JUnit + framework Instrumentation + clases de testing de Android
+	AndroidTestCase: Sobreescribiendo y agregando\nfuncionalidad para dar soporte a\nllamadas al API de Android
+	InstrumentationTestRunner: Puede correr cualquier tipo\nde pruebas, llamen al API de\nAndroid o no
+	
+@enduml

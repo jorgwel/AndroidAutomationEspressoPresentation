@@ -1,0 +1,19 @@
+@startuml
+
+    (Black box\ntesting)
+    (White box\ntesting)
+    (Unit\ntesting)
+    (Incremental\nintegration\ntesting)
+    (Integration\ntesting)
+    (Functional\ntesting)
+    (End to end\ntesting)
+    (Regression\ntesting)
+    (Acceptance\ntesting)
+    (Stress\ntesting)
+    (Performance\ntesting)
+    (Usability\ntesting)
+    (Install/uninstall\ntesting)
+    (Security\ntesting)
+    (Compatibility\ntesting)   
+
+@enduml
